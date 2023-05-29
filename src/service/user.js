@@ -17,7 +17,7 @@ userService.registerUser = async (userDetails) => {
             return { message: `Welcome ${userDetails.name}, your registration is successfully completed.` }
         }
     } catch (error) {
-        throwError("Something went wrong!! We will back", 404);
+        throwError("Something went wrong!! We will beback", 404);
     }
 };
 
@@ -25,14 +25,14 @@ userService.loginUser = async (userDetails) => {
     try {
         let loginUser = await userDB.loginUser(userDetails);
         //console.log(loginUser[0].password) //for fetching password field from mongoDB data
-        if(loginUser.length){
-            if(userDetails.password === loginUser[0].password){
-                return { message :"Login Successfull"}
-            }else{
-                return { message :"Incorrect password!!"}
+        if (loginUser.length) {
+            if (userDetails.password === loginUser[0].password) {
+                return { message: "Login Successfull" }
+            } else {
+                return { message: "Incorrect password!!" }
             }
-        }else{
-            return { message: "User not registered!!"}
+        } else {
+            return { message: "User not registered!!" }
         }
     } catch (err) {
         throwError("Something went wrong!! We will be back", 404);

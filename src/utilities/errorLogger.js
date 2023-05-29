@@ -1,19 +1,19 @@
-const fs= require('fs');
+const fs = require('fs');
 
-let errorLogger =(err, req, res, next)=>{
-    fs.appendFileSync('ErrorLogger.txt', new Date()+ " - "+ err.stack +"/n", (error)=>{
-        if(error){
+let errorLogger = (err, req, res, next) => {
+    fs.appendFileSync('ErrorLogger.txt', new Date() + " - " + err.stack + "/n", (error) => {
+        if (error) {
             console.log("Error Logging Failed")
-        }else{
-            if(err.status){
+        } else {
+            if (err.status) {
                 return res.status(err.status);
-            }else{
+            } else {
                 res.status(500);
-                res.json({"message": err.message});
+                res.json({ "message": err.message });
                 next();
             }
         }
     })
 }
 
-module.exports=errorLogger;
+module.exports = errorLogger;
