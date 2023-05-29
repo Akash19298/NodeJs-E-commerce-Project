@@ -49,6 +49,25 @@ router.get('/products', async (req, res, next) => {
     }
 });
 
+router.delete('/product/:id', async (req, res, next) => {
+    try {
+        let response = await productService.deleteProduct(req.params.id);
+        res.json(response);
+    } catch (err) {
+        next(err)
+    }
+});
+
+
+router.get('/product/:id', async (req, res, next) => {
+    try {
+        let response = await productService.getProductById(req.params.id);
+        res.json(response)
+    } catch (err) {
+        next(err)
+    }
+})
+
 
 
 module.exports = router;
