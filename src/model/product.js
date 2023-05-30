@@ -44,5 +44,40 @@ product.getProductById = async (productId) => {
     return product;
 }
 
+product.updateProductById = async (productId, requestBody) => {
+    let productModel = await collection.getProductCollection();
+    let updateProduct = await productModel.updateOne({ _id: productId }, { $set: requestBody });
+    if (updateProduct) {
+        return updateProduct;
+    } else {
+        let err = new Error("Something went wrong!! We will be back.");
+        err.status = 500;
+        throw err
+    }
+}
+
+product.searchProductByKey = async (key) => {
+    let productModel = await collection.getProductCollection();
+    let searchResult = await productModel.find({
+        $or: [
+            {
+                name: { $regex: key }
+            },
+            {
+                category: { $regex: key }
+            },
+            {
+                company: { $regex: key }
+            },
+        ]
+    });
+    if (searchResult) {
+        return searchResult
+    } else {
+        let err = new Error("Something went wrong!! We will be back.");
+        err.status = 500;
+        throw err;
+    }
+}
 
 module.exports = product;

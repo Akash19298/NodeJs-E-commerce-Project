@@ -65,4 +65,25 @@ productService.getProductById = async (productId) => {
     }
 }
 
+productService.updateProductById = async (productId, requestBody) => {
+    Validator.validateProductId(productId);
+    let updateProduct = await product.updateProductById(productId, requestBody);
+    if (updateProduct.modifiedCount > 0 && updateProduct.matchedCount > 0) {
+        return { message: "Product Updated!!", updateProduct }
+    } else if (updateProduct.modifiedCount == 0 && updateProduct.matchedCount > 0) {
+        return { message: "Nothing to update!!", updateProduct }
+    } else {
+        return { message: "No Product Found!!", updateProduct }
+    }
+}
+
+productService.searchProductByKey = async(key)=>{
+   let searchProduct = await product.searchProductByKey(key);
+   if(searchProduct.length>0){
+       return {message:"Searched Product:", searchProduct}
+   }else{
+     return {message:"No Results Found"}
+   }
+}
+
 module.exports = productService;

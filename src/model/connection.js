@@ -26,7 +26,7 @@ const productSchema = mongoose.Schema({
     category: { type: String, required: [true, "Required Field"] },
     userId: { type: String, required: [true, "Required Field"] },
     company: { type: String, required: [true, "Required Field"] }
-}, { collection: "products", timestamps: true, versionKey: false })
+}, { collection: "products", timestamps: false, versionKey: false })
 
 let collection = {}
 
