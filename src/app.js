@@ -4,10 +4,11 @@ const router = require('./routes/routing');
 const errorLogger = require('./utilities/errorLogger');
 const requestLogger = require('./utilities/requestLogger');
 const cors = require('cors');
+const helmet = require('helmet');
 const bodyParser = require('body-parser');
 const app = express();
 
-
+app.use(helmet());
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
